@@ -1,0 +1,18 @@
+#include <Wire.h>
+
+int potPin = A0; // Pin analógico donde está conectado el potenciómetro
+int motorPin = 9; // Pin de control del motor (por ejemplo, si estás usando un L298N)
+int potValue;
+int motorSpeed;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(motorPin, OUTPUT);
+    delay(2000); 
+}
+
+void loop() {
+    potValue = analogRead(potPin); // Leer el valor del potenciómetro (0 - 1023)
+    motorSpeed = map(potValue, 0, 1023, 0, 100); // Mapear el valor a un rango de 0 - 255 (para el control PWM)
+    analogWrite(motorPin, motorSpeed);
+}
